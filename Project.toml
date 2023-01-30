@@ -3,5 +3,9 @@ uuid = "2153004a-5f51-4728-838f-65cb51c6b0d2"
 authors = ["Jakub Rada <dev.jakubrada@icloud.com> and contributors"]
 version = "0.0.0"
 
+[deps]
+Clp = "e2554f3b-3117-50c0-817c-e040a3ddf72d"
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+
 [compat]
 julia = "1.7"
