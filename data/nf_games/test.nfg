@@ -1,0 +1,8 @@
+actions1: 1 2
+actions2: A B C
+U: 1 A 30
+U: 1 B -10
+U: 1 C 20
+U: 2 A -10
+U: 2 B 20
+U: 2 C -20
