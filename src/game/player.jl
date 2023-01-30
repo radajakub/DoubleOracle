@@ -22,5 +22,14 @@ Base.show(io::IO, p::Player) = print(io, "Player $(p.id)")
     createplayers(n)
 
 Create a vector of ``n`` Players with ids ``i ∈ {1,…,n}``
+
+# Examples
+```jldoctest
+julia> createplayers(3)
+3-element Vector{Player}:
+ Player 1
+ Player 2
+ Player 3
+```
 """
 createplayers(n::Integer) = [Player(i) for i in 1:n]
