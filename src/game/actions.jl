@@ -54,6 +54,13 @@ Retrieve name of action with assigned `id`.
 
 # Examples
 ```jldoctest
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
+Actions of Player 1
+→ [1] A
+→ [2] B
+→ [3] C
+→ [4] D
+
 julia> A[3]
 "C"
 ```
@@ -67,8 +74,15 @@ Retrieve id of action named `name`.
 
 # Examples
 ```jldoctest
-julia> A["C"]
-3
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
+Actions of Player 1
+→ [1] A
+→ [2] B
+→ [3] C
+→ [4] D
+
+julia> A["B"]
+2
 ```
 """
 Base.getindex(A::ActionSet, name::String) = A.nametoid[name]
@@ -80,8 +94,15 @@ Return number of actions in `A`.
 
 # Examples
 ```jldoctest
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
+Actions of Player 1
+→ [1] A
+→ [2] B
+→ [3] C
+→ [4] D
+
 julia> length(A)
-3
+4
 ```
 """
 Base.length(A::ActionSet) = A.n
@@ -93,11 +114,19 @@ Go through ids of all actions in fixed order.
 
 # Examples
 ```jldoctest
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
+Actions of Player 1
+→ [1] A
+→ [2] B
+→ [3] C
+→ [4] D
+
 julia> collect(A)
-3-element Vector{Any}:
+4-element Vector{Any}:
  1
  2
  3
+ 4
 ```
 """
 Base.iterate(A::ActionSet, state=1) = state > A.n ? nothing : (A.ids[state], state + 1)
