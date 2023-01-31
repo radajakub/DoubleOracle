@@ -33,3 +33,20 @@ julia> createplayers(3)
 ```
 """
 createplayers(n::Integer) = [Player(i) for i in 1:n]
+
+"""
+    getindex(container, player)
+
+Get the element on index of a `player` inside the `container`.
+The container has to be either Vector or Tuple
+The index corresponds to `id` of the `player`.
+
+# Examples
+```jldoctest
+julia> names = ("John", "Thomas", "Agatha")
+("John", "Thomas", "Agatha")
+julia> names[Player(3)]
+"Agatha"
+```
+"""
+Base.getindex(container::Base.AbstractVecOrTuple, player::Player) = 1 <= player.id <= length(container) ? container[player.id] : nothing
