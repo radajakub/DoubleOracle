@@ -24,6 +24,62 @@ struct NormalFormGame{T} <: Game where {T<:Real}
     U::Matrix{T}
 end
 
+function Base.show(io::IO, nfg::NormalFormGame)
+    println(io, "===== $(nfg.name) =====")
+    println(io, "players: ", join(nfg.N, " | "))
+    println(io)
+    for p in nfg.N
+        println(io, nfg.A[p])
+    end
+    println(io)
+
+    # print utility table dimensions
+    A1, A2 = nfg.A
+    println(io, "U ($(A1.n) × $(A2.n))")
+
+    # convert values to strings
+    Ustring = string.(nfg.U)
+
+    # compute cell max widths
+    cellwidth = max(maximum(length, Ustring), maximum(length, allnames(A2)))
+    tabwidth = maximum(length, allnames(A1)) + 1
+
+    # compute helper strings
+    tab = " "^tabwidth
+    hrule = "-"^((cellwidth + 3) * A2.n + 1)
+
+    # print utility table header
+    println(io, tab, " ", join(map(id -> " $(lpad(A2[id], cellwidth))  ", A2)))
+    println(io, tab, " ", hrule)
+
+    # print utility table content
+    for a1 in A1.ids
+        println(io, lpad(A1[a1], tabwidth), " |", join(map(a2 -> " $(lpad(nfg[a1, a2], cellwidth)) |", A2)))
+        println(io, tab, " ", hrule)
+    end
+end
+
+"""
+    getindex(nfg, a1, a2)
+
+Obtain `nfg` outcome by playing joing action profile `(a1, a2)`
+# Example
+```jldoctest
+julia> nfg = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame);
+julia> nfg[1, 1]
+1
+
+julia> nfg["1", "B"]
+-1
+
+```
+"""
+Base.getindex(nfg::NormalFormGame, a1::Integer, a2::Integer) = nfg.U[a1, a2]
+function Base.getindex(nfg::NormalFormGame, a1::String, a2::String)
+    A1, A2 = nfg.A
+    return nfg.U[A1[a1], A2[a2]]
+end
+
 """
     load(filepath, type)
 
@@ -32,7 +88,7 @@ The extension of the `filepath` must correspond to the game `type` (e.g. ``Norma
 
 # EXample
 ```
-julia> nf = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame)
+julia> nfg = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame)
 ```
 """
 function load(filepath::String, ::Type{NormalFormGame})

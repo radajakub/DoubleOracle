@@ -6,7 +6,7 @@ include(joinpath("game", "player.jl"))
 export Player, createplayers
 
 include(joinpath("game", "actions.jl"))
-export ActionSet
+export ActionSet, allnames
 
 include(joinpath("game", "game.jl"))
 export NormalFormGame, load

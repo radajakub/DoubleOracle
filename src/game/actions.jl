@@ -2,17 +2,19 @@
     ActionSet
 
 Set of actions of a single player. Store names and assign ids for internal representation.
+
+# Fields
+-   player: Player owning the set of actions
+-        n: Number of actions in the set
+-      ids: Vector of assigned integer ids
+- idtoname: Map translating an integer id to an action name
+- nametoid: Map translating name of action to the assigned id
 """
 struct ActionSet
-    "Player owning the set of actions"
     player::Player
-    "Number of actions in the set"
     n::Integer
-    "Vector of assigned integer ids"
     ids::Vector{Integer}
-    "Map translating an integer id to an action name"
     idtoname::Dict{Integer,String}
-    "Map translating name of action to the assigned id"
     nametoid::Dict{String,Integer}
 end
 
@@ -110,3 +112,19 @@ julia> collect(A)
 ```
 """
 Base.iterate(A::ActionSet, state=1) = state > A.n ? nothing : (A.ids[state], state + 1)
+
+"""
+    allnames(A)
+
+Return list of action `names` from `A` in the same order as `ids`
+
+# Examples
+```jldoctest
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
+Actions of Player 1: [1] A | [2] B | [3] C | [4] D |
+
+julia> allnames(A)
+["A", "B", "C", "D"]
+```
+"""
+allnames(A::ActionSet) = map(id -> A[id], A.ids)
