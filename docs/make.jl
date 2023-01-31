@@ -15,6 +15,12 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
+        "Documentation" => [
+            "Game definition" => "game.md"
+            "Solutions" => "solution.md"
+        ],
+        "Benchmarks" => "benchmarks.md",
+        "Index" => "doc_index.md",
     ]
 )
 deploydocs(

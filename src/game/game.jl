@@ -13,9 +13,9 @@ Here, player 1 tries to maximise the outcome of type `T`, player 2 minimises it.
 
 # Fields
 - `name`: Name of the NF game
--    `N`: Players of the game
--    `A`: Available actions of each player
--    `U`: Game matrix containing the outcomes for each joint action profile
+- `N`: Players of the game
+- `A`: Available actions of each player
+- `U`: Game matrix containing the outcomes for each joint action profile
 """
 struct NormalFormGame{T} <: Game where {T<:Real}
     name::String

@@ -11,7 +11,7 @@ include(joinpath("solve", "exact.jl"))
 
 export Player, createplayers
 export ActionSet, allnames
-export NormalFormGame, load, generate
+export Game, NormalFormGame, load, generate
 export MatrixGame
 export Algorithm, LinearProgram, solve
 export Solution, pairstrategies

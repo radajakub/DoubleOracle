@@ -4,11 +4,11 @@
 Set of actions of a single player. Store names and assign ids for internal representation.
 
 # Fields
--   player: Player owning the set of actions
--        n: Number of actions in the set
--      ids: Vector of assigned integer ids
-- idtoname: Map translating an integer id to an action name
-- nametoid: Map translating name of action to the assigned id
+- `player`: Player owning the set of actions
+- `n`: Number of actions in the set
+- `ids`: Vector of assigned integer ids
+- `idtoname`: Map translating an integer id to an action name
+- `nametoid`: Map translating name of action to the assigned id
 """
 struct ActionSet
     player::Player

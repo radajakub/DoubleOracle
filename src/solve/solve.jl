@@ -14,8 +14,8 @@ Both outcome and an equilibrium strategy is saved for both players.
 Note that this can be only a solution of a subgame, not necessarily the whole NFG.
 
 # Fields
--   outcomes: 2-tuple with game outcomes for each respective player
-- strategies: 2-tuple with en equilibrium strategies (probability distribution over rows/columns Δ(A)) for each respective player
+- `outcomes`: 2-tuple with game outcomes for each respective player
+- `strategies`: 2-tuple with en equilibrium strategies (probability distribution over rows/columns Δ(A)) for each respective player
 
 # Examples
 ```jldoctest
