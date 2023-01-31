@@ -4,7 +4,10 @@ Solving two-player zero-sum Normal-Form games by linear programming and DoubleOr
 
 ## Installation
 
-It is sufficient to instantiate the environment, there is no external installation needed.
+No additional installation steps are required, the julia package manager manages everything automatically.
+
+This package uses the Coin-Or linear optimizer, which is downloaded automatically by `julia` when adding the package.
+This optimizer can be viewed at [github](https://github.com/jump-dev/Clp.jl).
 
 ## Documentation
 
@@ -14,7 +17,7 @@ Documentation is accessible in the source code directly plus a generated Documen
 
 There are few prepared scripts in the `scripts` directory to demonstrate functionality.
 
-- `solve_nf_lp.jl [path_to_input_file]` solves a game using linear programming. The output is printed to stdout. The game is either loaded from file given by optional `path_to_input_file` or a random one is generated.
+- `solve_nf_lp.jl [path_to_input_file]` solves a game using linear programming. The output is printed to standard output. The game is either loaded from file given by optional `path_to_input_file` or a random one is generated.
 
 ## Tests
 
