@@ -60,7 +60,7 @@ function Base.show(io::IO, nfg::NormalFormGame)
 end
 
 """
-    getindex(nfg, a1, a2)
+    getindex(nfg::NormalFormGame, a1::Integer, a2::Integer)
 
 Obtain `nfg` outcome by playing joing action profile `(a1, a2)`
 # Example
@@ -81,7 +81,7 @@ function Base.getindex(nfg::NormalFormGame, a1::String, a2::String)
 end
 
 """
-    load(filepath, type)
+    load(filepath::String, type::Type{NormalFormGame})
 
 Load and return a game of `type` (i.e. ``NormalFormGame``, ...) from file located in the filesystem at `filepath`.
 The extension of the `filepath` must correspond to the game `type` (e.g. ``NormalFormGame -> .nfg``).

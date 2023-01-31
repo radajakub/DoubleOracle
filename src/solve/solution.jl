@@ -55,7 +55,7 @@ function Base.show(io::IO, solution::Solution)
 end
 
 """
-    (solution::Solution)(player::Player)
+    (solution::Solution)(p::Player)
 
 Shortcut to obtain `outcome` of a `player` present in `solution`.
 
@@ -66,10 +66,10 @@ julia> solution(Player(2))
 -1.0
 ```
 """
-(solution::Solution)(player::Player) = solution.outcomes[player]
+(solution::Solution)(p::Player) = solution.outcomes[p]
 
 """
-    getindex(solution::Solution, player::Player)
+    getindex(solution::Solution, p::Player)
 
 Shortcut to obtain `strategy` of a `player` present in `solution`.
 
@@ -81,7 +81,7 @@ julia> solution[Player(2)]
  ("B", 1.0)
 ```
 """
-Base.getindex(solution::Solution, player::Player) = solution.strategies[player]
+Base.getindex(solution::Solution, p::Player) = solution.strategies[p]
 
 """
     pairstrategies(names::Vector{String}, probs::Vector{Float64})

@@ -21,7 +21,7 @@ end
 Base.show(io::IO, A::ActionSet) = print(io, "Actions of $(A.player):", join(map(id -> " [$id] $(A[id]) |", A.ids)))
 
 """
-    ActionSet(player, actionnames)
+    ActionSet(player::Player, actionnames::Vector{String})
 
 Construct ActionSet for `player` containing action with names as in `actionnames`.
 
@@ -46,7 +46,7 @@ function ActionSet(player::Player, actionnames::Vector{String})
 end
 
 """
-    getindex(A, id::Integer)
+    getindex(A::ActionSet, id::Integer)
 
 Retrieve name of action with assigned `id`.
 
@@ -62,7 +62,7 @@ julia> A[3]
 Base.getindex(A::ActionSet, id::Integer) = A.idtoname[id]
 
 """
-    getindex(A, name::String)
+    getindex(A::ActionSet, name::String)
 
 Retrieve id of action named `name`.
 
@@ -78,7 +78,7 @@ julia> A["B"]
 Base.getindex(A::ActionSet, name::String) = A.nametoid[name]
 
 """
-    length(A)
+    length(A::ActionSet)
 
 Return number of actions in `A`.
 
@@ -94,7 +94,7 @@ julia> length(A)
 Base.length(A::ActionSet) = A.n
 
 """
-    iterate(A)
+    iterate(A::ActionSet)
 
 Go through ids of all actions in fixed order.
 
@@ -114,7 +114,7 @@ julia> collect(A)
 Base.iterate(A::ActionSet, state=1) = state > A.n ? nothing : (A.ids[state], state + 1)
 
 """
-    allnames(A)
+    allnames(A::ActionSet)
 
 Return list of action `names` from `A` in the same order as `ids`
 

@@ -8,7 +8,7 @@ abstract type Algorithm end
 """
     MatrixGame
 
-Solve and represent solution of a Matrix game u.
+Solve and represent solution of a Matrix game with matrix `u`.
 Solution is made by a standard linear program for two-player zero-sum Normal-form games.
 Both outcome and an equilibrium strategy is saved for both players.
 Note that this can be only a solution of a subgame, not necessarily the whole NFG.
@@ -74,7 +74,7 @@ function Base.show(io::IO, mg::MatrixGame)
 end
 
 """
-    (MatrixGame)(player)
+    (mg::MatrixGame)(p::Player)
 
 Obtain the `outcome` value of a `player` from the `MatrixGame` structure.
 
@@ -89,7 +89,7 @@ julia> mg(Player(1))
 
 
 """
-    getindex(MatrixGame, player)
+    getindex(mg::MatrixGame, p::Player)
 
 Obtain the `strategy` of a `player` from the `MatrixGame` structure.
 

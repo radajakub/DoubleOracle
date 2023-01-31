@@ -6,7 +6,7 @@ Subtype of `Algorithm` representing exact solution of a Normal-Form game by line
 abstract type LinearProgram <: Algorithm end
 
 """
-    solve(NormalFormGame, LinearProgram)
+    solve(nfg::NormalFormGame, ::Type{LinearProgram})
 
 Solve the `NormalFormGame` by linear programming and return the outcome and equilibrium strategies.
 """

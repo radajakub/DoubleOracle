@@ -19,7 +19,7 @@ end
 Base.show(io::IO, p::Player) = print(io, "Player $(p.id)")
 
 """
-    createplayers(n)
+    createplayers(n::Integer)
 
 Create a vector of ``n`` Players with ids ``i ∈ {1,…,n}``
 
@@ -35,7 +35,7 @@ julia> createplayers(3)
 createplayers(n::Integer) = [Player(i) for i in 1:n]
 
 """
-    getindex(container, player)
+    getindex(container::AbstractVecOrTuple, player::Player)
 
 Get the element on index of a `player` inside the `container`.
 The container has to be either Vector or Tuple
