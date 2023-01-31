@@ -18,6 +18,7 @@ Documentation is accessible in the source code directly plus a generated Documen
 There are few prepared scripts in the `scripts` directory to demonstrate functionality.
 
 - `solve_nf_lp.jl [path_to_input_file]` solves a game using linear programming. The output is printed to standard output. The game is either loaded from file given by optional `path_to_input_file` or a random one is generated.
+    - for example to solve **Matching pennies** use: `julia solve_nf_lp.jl ../data/nf_games/matching_pennies.nfg`
 
 ## Tests
 
