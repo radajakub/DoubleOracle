@@ -17,7 +17,7 @@ Note that this can be only a solution of a subgame, not necessarily the whole NF
 -   outcomes: 2-tuple with game outcomes for each respective player
 - strategies: 2-tuple with en equilibrium strategies (probability distribution over rows/columns Δ(A)) for each respective player
 
-# Example
+# Examples
 ```jldoctest
 julia> u = [1 -1; -1 1];
 julia> MatrixGame(u)
@@ -78,7 +78,7 @@ end
 
 Obtain the `outcome` value of a `player` from the `MatrixGame` structure.
 
-# Example
+# Examples
 ```jldoctest
 julia> mg = MatrixGame([1 -1; -1 1]);
 julia> mg(Player(1))
@@ -93,7 +93,7 @@ julia> mg(Player(1))
 
 Obtain the `strategy` of a `player` from the `MatrixGame` structure.
 
-# Example
+# Examples
 ```jldoctest
 julia> mg = MatrixGame([1 -1; -1 1]);
 julia> mg[Player(1)]

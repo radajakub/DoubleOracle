@@ -63,7 +63,7 @@ end
     getindex(nfg::NormalFormGame, a1::Integer, a2::Integer)
 
 Obtain `nfg` outcome by playing joing action profile `(a1, a2)`
-# Example
+# Examples
 ```jldoctest
 julia> nfg = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame);
 julia> nfg[1, 1]
@@ -125,4 +125,60 @@ function load(filepath::String, ::Type{NormalFormGame})
 
     # construct the game
     return NormalFormGame(basename(filepath), (P1, P2), (A1, A2), U)
+end
+
+"""
+    generate(::Type{NormalFormGame}, A1min, A1max, A2min, A2max, minutil, maxutil, utilstep)
+
+Generate random Normal-Form game with given parameters.
+
+# Fields
+- A1min::Integer: minimum number of actions of player 1 (default 2)
+- A1max::Integer: maximum number of actions of player 1 (default 5)
+- A2min::Integer: minimum number of actions of player 2 (default 2)
+- A2max::Integer: maximum number of actions of player 2 (default 5)
+- minutil<:Real: minimum utility possible for player 1
+- maxutil<:Real: maxium utility possible for player 1
+- utilstep<:Real: minimum difference between two different utility values for player 1
+
+# Examples
+```jldoctest
+julia> generate(NormalFormGame; A1min=2, A1max=2, A2min=3, A2max=3, minutil=1, maxutil=1)
+===== generated =====
+players: Player 1 | Player 2
+
+Actions of Player 1: [1] 1 | [2] 2 |
+Actions of Player 2: [1] 1 | [2] 2 | [3] 3 |
+
+U (2 × 3)
+    1   2   3
+   -------------
+ 1 | 1 | 1 | 1 |
+   -------------
+ 2 | 1 | 1 | 1 |
+   -------------
+```
+"""
+function generate(::Type{NormalFormGame}; A1min::S=2, A1max::S=5, A2min::S=2, A2max::S=5, minutil::T=-10, maxutil::T=10, utilstep::T=1) where {S<:Integer,T<:Real}
+    # check if the min and max do not conflict
+    @assert 1 <= A1min <= A1max
+    @assert 1 <= A2min <= A2max
+    @assert minutil <= maxutil
+    @assert utilstep <= maxutil - minutil + 1
+
+    # create players
+    P1, P2 = createplayers(2)
+
+    # generate random number for actions of both player while respecting given constraints
+    A1count = rand(A1min:A1max)
+    A2count = rand(A2min:A2max)
+
+    # create action sets with names corresponding to ids (for simplicity)
+    A1 = ActionSet(P1, string.(collect(1:A1count)))
+    A2 = ActionSet(P2, string.(collect(1:A2count)))
+
+    # create random matrix with dimensions given by the action counts
+    U = rand(minutil:utilstep:maxutil, (A1count, A2count))
+
+    return NormalFormGame("generated", (P1, P2), (A1, A2), U)
 end

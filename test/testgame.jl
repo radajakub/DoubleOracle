@@ -67,4 +67,23 @@
         @test nfg["2", "B"] == 1
     end
 
+    @testset verbose = true "Random NormalFormGame" begin
+        A1min = 2
+        A1max = 5
+        A2min = 3
+        A2max = 4
+        minutil = -10
+        maxutil = 10
+        utilstep = 1
+        nfg = generate(NormalFormGame; A1min, A2min, A1max, A2max, minutil, maxutil, utilstep)
+
+        A1, A2 = nfg.A
+
+        # test sizes and constraints
+        @test nfg.N == tuple(createplayers(2)...)
+        @test A1min <= A1.n <= A1max
+        @test A2min <= A2.n <= A2max
+        @test all(minutil .<= nfg.U .<= maxutil)
+    end
+
 end

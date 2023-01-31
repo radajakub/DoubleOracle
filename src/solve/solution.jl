@@ -21,7 +21,7 @@ end
 Construct Solution in a case where `mg` contains solution of the whole `nfg`, i.e. in exact solution by linear programming.
 Strategies in `mg` are assumed to be of same length as action sets in `nfg`.
 
-# Example
+# Examples
 ```jldoctest
 julia> nfg = load("./data/nf_games/matching_pennies.nfg", NormalFormGame);
 julia> mg = MatrixGame(nfg.u);
@@ -59,7 +59,7 @@ end
 
 Shortcut to obtain `outcome` of a `player` present in `solution`.
 
-# Example
+# Examples
 ```jldoctest
 julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
 julia> solution(Player(2))
@@ -73,7 +73,7 @@ julia> solution(Player(2))
 
 Shortcut to obtain `strategy` of a `player` present in `solution`.
 
-# Example
+# Examples
 ```jldoctest
 julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
 julia> solution[Player(2)]
@@ -88,7 +88,7 @@ Base.getindex(solution::Solution, p::Player) = solution.strategies[p]
 
 Merge `names` and `probs` (probabilities) in such a way that first element in `names` is joined with first element in `probs` into a tuple and so on.
 
-# Example
+# Examples
 ```jldoctest
 julia> names = ["A", "B"];
 julia> probs = [1.0, 0.0];

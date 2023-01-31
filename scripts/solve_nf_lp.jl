@@ -3,12 +3,17 @@ Pkg.activate(pwd())
 
 using DoubleOracle
 
-if length(ARGS) < 0
-    println("You must provide an input file path as the first argument!")
-    exit(1)
+if length(ARGS) >= 1
+    println("Loading game from file")
+    nfg = load(ARGS[1], NormalFormGame)
+else
+    println("Generating random game")
+    nfg = generate(NormalFormGame)
 end
 
-nfg = load(ARGS[1], NormalFormGame);
+print(nfg)
+
+print("Solving given normal form game by Linear programming")
 solution = solve(nfg, LinearProgram)
 
 println(solution)
