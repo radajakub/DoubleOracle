@@ -3,6 +3,7 @@ Pkg.activate(pwd())
 
 using DoubleOracle
 
+# decide if game is generated or loaded from file
 if length(ARGS) >= 1
     println("Loading game from file")
     nfg = load(ARGS[1], NormalFormGame)
@@ -13,6 +14,7 @@ end
 
 print(nfg)
 
+# solve normal form game by linear program
 print("Solving given normal form game by Linear programming")
 solution = solve(nfg, LinearProgram)
 

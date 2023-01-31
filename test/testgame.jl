@@ -68,6 +68,7 @@
     end
 
     @testset verbose = true "Random NormalFormGame" begin
+        # define constraints for the generation
         A1min = 2
         A1max = 5
         A2min = 3
@@ -75,8 +76,9 @@
         minutil = -10
         maxutil = 10
         utilstep = 1
-        nfg = generate(NormalFormGame; A1min, A2min, A1max, A2max, minutil, maxutil, utilstep)
 
+        # generate game
+        nfg = generate(NormalFormGame; A1min, A2min, A1max, A2max, minutil, maxutil, utilstep)
         A1, A2 = nfg.A
 
         # test sizes and constraints
