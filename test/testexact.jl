@@ -11,8 +11,8 @@
     end
 
     @testset verbose = true "Strategies" begin
-        @test solution[P1] == [0.5 for i in 1:nfg.A[P1].n]
-        @test solution[P2] == [0.5 for i in 1:nfg.A[P2].n]
+        @test solution[P1] == [("1", 0.5), ("2", 0.5)]
+        @test solution[P2] == [("A", 0.5), ("B", 0.5)]
     end
 
 end

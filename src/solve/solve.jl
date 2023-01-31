@@ -11,6 +11,7 @@ abstract type Algorithm end
 Solve and represent solution of a Matrix game u.
 Solution is made by a standard linear program for two-player zero-sum Normal-form games.
 Both outcome and an equilibrium strategy is saved for both players.
+Note that this can be only a solution of a subgame, not necessarily the whole NFG.
 
 # Fields
 -   outcomes: 2-tuple with game outcomes for each respective player
