@@ -28,7 +28,7 @@
         @test collect(A) == [1, 2, 3, 4]
     end
 
-    @testset verbose = true "Normal Form Game" begin
+    @testset verbose = true "NormalFormGame" begin
         # load game to test
         nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame)
 

@@ -3,12 +3,15 @@ module DoubleOracle
 using JuMP, Clp
 
 include(joinpath("game", "player.jl"))
-export Player, createplayers
-
 include(joinpath("game", "actions.jl"))
-export ActionSet, allnames
-
 include(joinpath("game", "game.jl"))
+include(joinpath("solve", "solve.jl"))
+include(joinpath("solve", "exact.jl"))
+
+export Player, createplayers
+export ActionSet, allnames
 export NormalFormGame, load
+export MatrixGame, solve
+export Algorithm, LinearProgram
 
 end
