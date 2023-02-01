@@ -5,7 +5,7 @@ using JuMP, Clp
 include(joinpath("game", "player.jl"))
 include(joinpath("game", "actions.jl"))
 include(joinpath("game", "game.jl"))
-include(joinpath("solve", "solve.jl"))
+include(joinpath("solve", "utils.jl"))
 include(joinpath("solve", "solution.jl"))
 include(joinpath("solve", "exact.jl"))
 
