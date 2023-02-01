@@ -20,11 +20,13 @@ Note that this can be only a solution of a subgame, not necessarily the whole NF
 # Examples
 ```jldoctest
 julia> u = [1 -1; -1 1];
+
 julia> MatrixGame(u)
 MatrixGame results:
 → outcome of the Nash Equilibrium: (0.0, -0.0)
 → strategy of row player: [0.5, 0.5]
-→ strategy of columne player: [0.5, 0.5]
+→ strategy of column player: [0.5, 0.5]
+
 ```
 """
 struct MatrixGame
@@ -81,8 +83,10 @@ Obtain the `outcome` value of a `player` from the `MatrixGame` structure.
 # Examples
 ```jldoctest
 julia> mg = MatrixGame([1 -1; -1 1]);
+
 julia> mg(Player(1))
 0.0
+
 ```
 """
 (mg::MatrixGame)(p::Player) = mg.outcomes[p]
@@ -96,10 +100,12 @@ Obtain the `strategy` of a `player` from the `MatrixGame` structure.
 # Examples
 ```jldoctest
 julia> mg = MatrixGame([1 -1; -1 1]);
+
 julia> mg[Player(1)]
 2-element Vector{Float64}:
  0.5
  0.5
+
 ```
 """
 Base.getindex(mg::MatrixGame, p::Player) = mg.strategies[p]

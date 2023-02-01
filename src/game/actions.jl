@@ -32,6 +32,7 @@ Actions of Player 1: [1] A | [2] B | [3] C |
 
 julia> ActionSet(Player(2), ["f", "e", "d"])
 Actions of Player 2: [1] f | [2] e | [3] d |
+
 ```
 """
 function ActionSet(player::Player, actionnames::Vector{String})
@@ -57,6 +58,7 @@ Actions of Player 1: [1] A | [2] B | [3] C | [4] D |
 
 julia> A[3]
 "C"
+
 ```
 """
 Base.getindex(A::ActionSet, id::Integer) = A.idtoname[id]
@@ -73,6 +75,7 @@ Actions of Player 1: [1] A | [2] B | [3] C | [4] D |
 
 julia> A["B"]
 2
+
 ```
 """
 Base.getindex(A::ActionSet, name::String) = A.nametoid[name]
@@ -89,6 +92,7 @@ Actions of Player 1: [1] A | [2] B | [3] C | [4] D |
 
 julia> length(A)
 4
+
 ```
 """
 Base.length(A::ActionSet) = A.n
@@ -109,6 +113,7 @@ julia> collect(A)
  2
  3
  4
+
 ```
 """
 Base.iterate(A::ActionSet, state=1) = state > A.n ? nothing : (A.ids[state], state + 1)
@@ -124,7 +129,12 @@ julia> A = ActionSet(Player(1), ["A", "B", "C", "D"])
 Actions of Player 1: [1] A | [2] B | [3] C | [4] D |
 
 julia> allnames(A)
-["A", "B", "C", "D"]
+4-element Vector{String}:
+ "A"
+ "B"
+ "C"
+ "D"
+
 ```
 """
 allnames(A::ActionSet) = map(id -> A[id], A.ids)

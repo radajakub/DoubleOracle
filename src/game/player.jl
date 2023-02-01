@@ -30,6 +30,7 @@ julia> createplayers(3)
  Player 1
  Player 2
  Player 3
+
 ```
 """
 createplayers(n::Integer) = [Player(i) for i in 1:n]
@@ -45,8 +46,10 @@ The index corresponds to `id` of the `player`.
 ```jldoctest
 julia> names = ("John", "Thomas", "Agatha")
 ("John", "Thomas", "Agatha")
+
 julia> names[Player(3)]
 "Agatha"
+
 ```
 """
 Base.getindex(container::Base.AbstractVecOrTuple, player::Player) = 1 <= player.id <= length(container) ? container[player.id] : nothing

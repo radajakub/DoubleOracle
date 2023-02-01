@@ -65,12 +65,13 @@ end
 Obtain `nfg` outcome by playing joing action profile `(a1, a2)`
 # Examples
 ```jldoctest
-julia> nfg = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame);
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
+
 julia> nfg[1, 1]
-1
+1.0
 
 julia> nfg["1", "B"]
--1
+-1.0
 
 ```
 """
@@ -86,9 +87,9 @@ end
 Load and return a game of `type` (i.e. ``NormalFormGame``, ...) from file located in the filesystem at `filepath`.
 The extension of the `filepath` must correspond to the game `type` (e.g. ``NormalFormGame -> .nfg``).
 
-# EXample
-```
-julia> nfg = load("./data/nf_games/mathing_pennies.nfg, NormalFormGame)
+# Example
+```julia-repl
+julia> nfg = load("../data/nf_games/mathing_pennies.nfg", NormalFormGame)
 ```
 """
 function load(filepath::String, ::Type{NormalFormGame})
@@ -158,6 +159,7 @@ U (2 × 3)
  2 | 1 | 1 | 1 |
    -------------
 ```
+
 """
 function generate(::Type{NormalFormGame}; A1min::S=2, A1max::S=5, A2min::S=2, A2max::S=5, minutil::T=-10, maxutil::T=10, utilstep::T=1) where {S<:Integer,T<:Real}
     # check if the min and max do not conflict

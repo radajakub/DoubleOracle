@@ -23,8 +23,10 @@ Strategies in `mg` are assumed to be of same length as action sets in `nfg`.
 
 # Examples
 ```jldoctest
-julia> nfg = load("./data/nf_games/matching_pennies.nfg", NormalFormGame);
-julia> mg = MatrixGame(nfg.u);
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
+
+julia> mg = MatrixGame(nfg.U);
+
 julia> Solution(mg, nfg)
 The two-player zero-sum Normal-Form game was solved
 
@@ -33,6 +35,7 @@ Player 1 gains outcome 0.0 by playing a strategy
 
 Player 2 gains outcome -0.0 by playing a strategy
  → [A : 0.5, B : 0.5]
+
 ```
 """
 function Solution(mg::MatrixGame, nfg::NormalFormGame)
@@ -62,8 +65,10 @@ Shortcut to obtain `outcome` of a `player` present in `solution`.
 # Examples
 ```jldoctest
 julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
+
 julia> solution(Player(2))
 -1.0
+
 ```
 """
 (solution::Solution)(p::Player) = solution.outcomes[p]
@@ -76,9 +81,11 @@ Shortcut to obtain `strategy` of a `player` present in `solution`.
 # Examples
 ```jldoctest
 julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
+
 julia> solution[Player(2)]
 1-element Vector{Tuple{String, Float64}}:
  ("B", 1.0)
+
 ```
 """
 Base.getindex(solution::Solution, p::Player) = solution.strategies[p]
@@ -91,11 +98,14 @@ Merge `names` and `probs` (probabilities) in such a way that first element in `n
 # Examples
 ```jldoctest
 julia> names = ["A", "B"];
+
 julia> probs = [1.0, 0.0];
+
 julia> pairstrategies(names, probs)
 2-element Vector{Tuple{String, Float64}}:
  ("A", 1.0)
  ("B", 0.0)
+
 ```
 """
 pairstrategies(names::Vector{String}, probs::Vector{Float64}) = collect(zip(names, probs))
