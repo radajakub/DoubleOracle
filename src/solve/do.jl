@@ -138,7 +138,7 @@ function bestresponse(nfg::NormalFormGame, O::Oracle, p::Vector{Float64}, ::Type
 end
 
 """
-    bestresponse(nfg::NormalFormGame, O::Oracle, p::Vector{Float64}, ::Type{ColumnRestriction})
+    bestresponse(nfg::NormalFormGame, O::Oracle, p::Vector{Float64}, ::Type{RowRestriction})
 
 Find id of a best response pure strategy in a Normal-Form game, when fixing Oracle `O` of the opponent and the equilibrium mixed strategy `p`, which is computed by solving a game restricted by Oracles of both players.
 This function finds the best response of the column player.
