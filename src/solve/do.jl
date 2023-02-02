@@ -11,7 +11,7 @@ abstract type DoubleOracleAlgorithm <: Algorithm end
 Abstract type uniting possible partial restrictions of the game.
 Partial restriction means only some subset of rows or columns is preserved.
 """
-abstract type GameRestrictions end
+abstract type GameRestriction end
 
 """
     ColumnRestriction
@@ -19,7 +19,7 @@ abstract type GameRestrictions end
 A game restriction which preserves only some columns from the payoff matrix.
 All rows in the given columns are preserved as well.
 """
-abstract type ColumnRestriction <: GameRestrictions end
+abstract type ColumnRestriction <: GameRestriction end
 
 """
     RowRestriction
@@ -27,7 +27,7 @@ abstract type ColumnRestriction <: GameRestrictions end
 A game restriction which preserves only some rows from the payoff matrix.
 All columns in the given rows are preserved as well.
 """
-abstract type RowRestriction <: GameRestrictions end
+abstract type RowRestriction <: GameRestriction end
 
 """
     restrict(nfg::NormalFormGame, O1::Oracle, O2::Oracle)
@@ -76,7 +76,7 @@ julia> nfg = load("../data/nf_games/test.nfg", NormalFormGame);
 
 julia> O = Oracle(Player(2), 2);
 
-julia> add!(O2, 3);
+julia> add!(O, 3);
 
 julia> nfg.U
 2×3 Matrix{Float64}:
@@ -116,7 +116,7 @@ Oracle for Player 1 has actions: [1]
 
 julia> restrict(nfg, O, RowRestriction)
 1×3 Matrix{Float64}:
- 30.0  -10.0   20.0
+ 30.0  -10.0  20.0
 
 ```
 """

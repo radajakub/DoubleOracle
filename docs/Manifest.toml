@@ -125,7 +125,7 @@ uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 version = "0.27.23"
 
 [[deps.DoubleOracle]]
-deps = ["Clp", "JuMP"]
+deps = ["Clp", "JuMP", "LinearAlgebra"]
 path = ".."
 uuid = "2153004a-5f51-4728-838f-65cb51c6b0d2"
 version = "0.0.0"

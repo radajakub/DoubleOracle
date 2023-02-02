@@ -1,4 +1,4 @@
-# Solutions
+# Solution utilities
 
 This part summarizes funtions and structures providing solutions for games defined in previous section.
 
@@ -43,16 +43,4 @@ When probabilities are to be joined with corresponding action names, the `pairst
 
 ```@docs
 pairstrategies(::Vector{String}, ::Vector{Float64})
-```
-
-## Exact solve by linear programming
-
-```@docs
-LinearProgram
-```
-
-To obtain an exact solution of a given Normal-Form game, use the function `solve` with `LinearProgram` parameter.
-
-```@docs
-solve(::NormalFormGame, ::Type{LinearProgram})
 ```

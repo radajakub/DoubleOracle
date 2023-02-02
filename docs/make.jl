@@ -16,8 +16,10 @@ makedocs(;
     pages=[
         "Home" => "index.md",
         "Documentation" => [
-            "Game definition" => "game.md"
-            "Solutions" => "solution.md"
+            "Game definition" => "game.md",
+            "Solution utilities" => "solution_utils.md",
+            "Exact solution by Linear programming" => "solve_lp.md",
+            "Solution by Double Oracle algorithm" => "solve_do.md",
         ],
         "Benchmarks" => "benchmarks.md",
         "Index" => "doc_index.md",

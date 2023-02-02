@@ -43,6 +43,13 @@ To obtain `::Vector{String}` of names of all actions in the set in the exact ord
 allnames(::ActionSet)
 ```
 
+Another often used feature is selecting a single action at random from the set.
+This can be done by
+
+```@docs
+randomaction(::ActionSet)
+```
+
 ## Game
 
 ```@docs

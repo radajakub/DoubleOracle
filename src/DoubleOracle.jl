@@ -20,6 +20,6 @@ export MatrixGame
 export Solution, pairstrategies
 export Algorithm, LinearProgram, DoubleOracleAlgorithm, solve
 export Oracle, add!, fullstrategy
-export bestresponse, restrict, PartialRestrictions, ColumnRestriction, RowRestriction
+export bestresponse, restrict, GameRestriction, ColumnRestriction, RowRestriction
 
 end
