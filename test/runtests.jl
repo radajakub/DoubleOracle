@@ -7,4 +7,5 @@ using Test
     include("testlp.jl")
     include("testoracle.jl")
     include("testdo.jl")
+    include("testcompare.jl")
 end

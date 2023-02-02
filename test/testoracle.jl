@@ -26,11 +26,16 @@
     end
 
     @testset verbose = true "Test strategy completion" begin
+        # create oracle with 4 action ids
         O = Oracle(Player(1), 2)
         add!(O, 3)
         add!(O, 7)
         add!(O, 9)
+
+        # create probability vector for the oracle
         p = [0.1, 0.05, 0.6, 0.25]
+
+        # test creating strategy with actions with ids 1:10 while considering oracle and probabilities
         @test fullstrategy(O, p, 10) == [0.0, 0.1, 0.05, 0.0, 0.0, 0.0, 0.6, 0.0, 0.25, 0.0]
     end
 

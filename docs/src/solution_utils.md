@@ -44,3 +44,11 @@ When probabilities are to be joined with corresponding action names, the `pairst
 ```@docs
 pairstrategies(::Vector{String}, ::Vector{Float64})
 ```
+
+To compare two solutions whether they are the same (or approximately the same with tolerance `atol`) use the following functions.
+
+```@docs
+samepayoffs(::NTuple{2,Float64}, ::NTuple{2,Float64})
+samestrategies(::Vector{Tuple{String,Float64}}, ::Vector{Tuple{String,Float64}})
+samesolutions(::Solution, ::Solution)
+```

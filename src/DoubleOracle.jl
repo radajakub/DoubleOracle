@@ -17,7 +17,7 @@ export Player, createplayers
 export ActionSet, allnames, randomaction
 export Game, NormalFormGame, load, generate
 export MatrixGame
-export Solution, pairstrategies
+export Solution, pairstrategies, samesolutions, samepayoffs, samestrategies
 export Algorithm, LinearProgram, DoubleOracleAlgorithm, solve
 export Oracle, add!, fullstrategy
 export bestresponse, restrict, GameRestriction, ColumnRestriction, RowRestriction

@@ -138,6 +138,74 @@ julia> solution[Player(2)]
 Base.getindex(solution::Solution, p::Player) = solution.strategies[p]
 
 """
+    samesolutions(s1::Solution, s2::Solution; atol=1e-4)
+
+Compare two solutions `s1`, `s2` whether they are the same (or similar).
+Outcomes, names of actions and probabilities are compared with tolerance `atol`.
+
+# Examples
+```jldoctest
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
+
+julia> s1 = solve(nfg, LinearProgram);
+
+julia> s2 = solve(nfg, DoubleOracleAlgorithm);
+
+julia> samesolutions(s1, s2)
+true
+```
+"""
+function samesolutions(s1::Solution, s2::Solution; atol=1e-4)
+    P1, P2 = createplayers(2)
+    return samepayoffs(s1.outcomes, s2.outcomes; atol) &&
+           samestrategies(s1.strategies[P1], s2.strategies[P1]; atol) &&
+           samestrategies(s1.strategies[P2], s2.strategies[P2]; atol)
+end
+
+"""
+    samepayoffs(s1::NTuple{2, Float64}, s2::NTuple{2, Float64}; atol=1e-4)
+
+Compare two solutions `s1`, `s2` whether they have the same (or similar) payoffs.
+Outcomes are compared with tolerance `atol`.
+
+# Examples
+```jldoctest
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
+
+julia> s1 = solve(nfg, LinearProgram);
+
+julia> s2 = solve(nfg, DoubleOracleAlgorithm);
+
+julia> samepayoffs(s1.outcomes, s2.outcomes)
+true
+```
+"""
+samepayoffs(s1::NTuple{2,Float64}, s2::NTuple{2,Float64}; atol=1e-4) = all(isapprox.(s1, s2; atol))
+
+"""
+    samestrategies(s1::Vector{Tuple{String,Float64}}, s2::Vector{Tuple{String,Float64}}; atol=1e-4)
+
+Compare two vectors of strategies `s1`, `s2` whether they are the same including name of actions and order.
+Probabilities in the strategies are compared with tolerance `atol`.
+
+# Examples
+```jldoctest
+julia> s1 = [("A", 0.2), ("B", 0.5), ("C", 0.3)];
+
+julia> s2 = [("A", 0.20005), ("B", 0.49999), ("C", 0.3)];
+
+julia> s3 = [("A", 0.3), ("B", 0.5), ("D", 0.2)];
+
+julia> samestrategies(s1, s2)
+true
+
+julia> samestrategies(s1, s3)
+false
+```
+"""
+samestrategies(s1::Vector{Tuple{String,Float64}}, s2::Vector{Tuple{String,Float64}}; atol=1e-4) = all(map((p1, p2) -> p1[1] == p2[1] && isapprox(p1[2], p2[2]; atol), s1, s2))
+
+"""
     pairstrategies(names::Vector{String}, probs::Vector{Float64})
 
 Merge `names` and `probs` (probabilities) in such a way that first element in `names` is joined with first element in `probs` into a tuple and so on.
