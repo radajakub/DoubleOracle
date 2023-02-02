@@ -138,3 +138,18 @@ julia> allnames(A)
 ```
 """
 allnames(A::ActionSet) = map(id -> A[id], A.ids)
+
+"""
+    randomaction(A::ActionSet)
+
+Select a random action id of the action set `A`.
+
+# Examples
+```julia-repl
+julia> A = ActionSet(Player(1), ["A", "B", "C", "D"]);
+
+julia> a = randomaction(A)
+a = 3
+```
+"""
+randomaction(A::ActionSet) = rand(A.ids)

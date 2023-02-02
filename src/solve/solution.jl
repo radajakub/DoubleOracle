@@ -48,6 +48,53 @@ function Solution(mg::MatrixGame, nfg::NormalFormGame)
     return Solution(nfg.name, mg.outcomes, (pairstrategies(allnames(nfg.A[P1]), mg[P1]), pairstrategies(allnames(nfg.A[P2]), mg[P2])))
 end
 
+"""
+    Solution(mg::MatrixGame, O1::Oracle, O2::Oracle, nfg::NormalFormGame)
+
+Construct Solution in a case where `mg` contains a solution of a `nfg` restriction defined by Oracles `O1` and `O2`. Most likely used in the Double Oracle algorithm, where not the whole matrix is used.
+Full strategies are reconstructed from the partial solution in `mg` and selected actions in Oracles.
+
+# Examples
+```jldoctest
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
+
+julia> O1 = Oracle(Player(1), 1)
+Oracle for Player 1 has actions: [1]
+
+julia> O2 = Oracle(Player(2), 2)
+Oracle for Player 2 has actions: [2]
+
+julia> subgame = restrict(nfg, O1, O2)
+1×1 Matrix{Float64}:
+ -1.0
+
+julia> mg = MatrixGame(subgame)
+MatrixGame results:
+→ outcome of the Nash Equilibrium: (-1.0, 1.0)
+→ strategy of row player: [1.0]
+→ strategy of column player: [1.0]
+
+julia> Solution(mg, O1, O2, nfg)
+The two-player zero-sum Normal-Form game was solved
+
+Player 1 gains outcome -1.0 by playing a strategy
+ → [1 : 1.0, 2 : 0.0]
+
+Player 2 gains outcome 1.0 by playing a strategy
+ → [A : 0.0, B : 1.0]
+
+```
+"""
+function Solution(mg::MatrixGame, O1::Oracle, O2::Oracle, nfg::NormalFormGame)
+    P1, P2 = nfg.N
+    A1, A2 = nfg.A
+
+    pi1 = fullstrategy(O1, mg[P1], A1.n)
+    pi2 = fullstrategy(O2, mg[P2], A2.n)
+
+    return Solution(nfg.name, mg.outcomes, (pairstrategies(allnames(A1), pi1), pairstrategies(allnames(A2), pi2)))
+end
+
 function Base.show(io::IO, solution::Solution)
     println(io, "The two-player zero-sum Normal-Form game was solved")
     for P in createplayers(2)
