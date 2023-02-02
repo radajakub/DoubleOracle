@@ -5,8 +5,8 @@ Represent solution of the Normal-Form game.
 In contrast to MatrixGame, this solution corresponds always to the whole NFG.
 
 # Fields
--       name: name of the NormalFormGame (for pretty output)
--   outcomes: 2-tuple of outcome for each player
+- name: name of the NormalFormGame (for pretty output)
+- outcomes: 2-tuple of outcome for each player
 - strategies: 2-tuple of strategies for each player (strategy is a vector of tuples, where first part is name of action and second is a playing probability in equilibrium)
 """
 struct Solution
