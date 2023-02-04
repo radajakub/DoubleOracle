@@ -3,6 +3,7 @@ module DoubleOracle
 using JuMP
 using Clp
 using LinearAlgebra
+using StatsBase
 
 include(joinpath("game", "player.jl"))
 include(joinpath("game", "actions.jl"))

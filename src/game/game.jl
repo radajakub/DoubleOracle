@@ -141,6 +141,7 @@ Generate random Normal-Form game with given parameters.
 - minutil<:Real: minimum utility possible for player 1
 - maxutil<:Real: maxium utility possible for player 1
 - utilstep<:Real: minimum difference between two different utility values for player 1
+- unique: option to enforce unique payoffs from the interval `minutil:maxutil` (ignores step to produce sufficient range)
 
 # Examples
 ```jldoctest
@@ -161,7 +162,7 @@ U (2 × 3)
 ```
 
 """
-function generate(::Type{NormalFormGame}; A1min::S=2, A1max::S=5, A2min::S=2, A2max::S=5, minutil::T=-10, maxutil::T=10, utilstep::T=1) where {S<:Integer,T<:Real}
+function generate(::Type{NormalFormGame}; A1min::S=2, A1max::S=5, A2min::S=2, A2max::S=5, minutil::T=-10, maxutil::T=10, utilstep::T=1, unique=false) where {S<:Integer,T<:Real}
     # check if the min and max do not conflict
     @assert 1 <= A1min <= A1max
     @assert 1 <= A2min <= A2max
@@ -180,7 +181,16 @@ function generate(::Type{NormalFormGame}; A1min::S=2, A1max::S=5, A2min::S=2, A2
     A2 = ActionSet(P2, string.(collect(1:A2count)))
 
     # create random matrix with dimensions given by the action counts
-    U = rand(minutil:utilstep:maxutil, (A1count, A2count))
+    if unique
+        # number of possible payoffs for the sampling without replacement
+        # 100 is selected to provide sufficient variability of the samples
+        payoffcnt = A1count * A2count * 100
+        # sample the payoff values from the specified range without replacement (ignore step to produce large enough interval)
+        U = sample(range(minutil, maxutil, length=payoffcnt), (A1count, A2count), replace=false)
+    else
+        # sample the payoff values from the specified range and step with replacement
+        U = sample(minutil:utilstep:maxutil, (A1count, A2count), replace=true)
+    end
 
     return NormalFormGame("generated", (P1, P2), (A1, A2), U)
 end
