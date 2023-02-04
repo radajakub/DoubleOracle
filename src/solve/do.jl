@@ -5,6 +5,8 @@ Subtype of `Algorithm` representing solution of a Normal-Form game by the Double
 """
 abstract type DoubleOracleAlgorithm <: Algorithm end
 
+Base.show(io::IO, ::Type{DoubleOracleAlgorithm}) = print(io, "Double Oracle algorithm")
+
 """
     GameRestrictions
 
@@ -203,5 +205,5 @@ function solve(nfg::NormalFormGame, ::Type{DoubleOracleAlgorithm})
         add!(O2, newa2)
     end
 
-    return Solution(mg, O1, O2, nfg)
+    return Solution(mg, O1, O2, nfg, DoubleOracleAlgorithm)
 end

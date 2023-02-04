@@ -29,7 +29,7 @@ It holds final equilibria strategies and outcomes.
 
 ```@docs
 Solution
-Solution(::MatrixGame, ::NormalFormGame)
+Solution(::MatrixGame, ::NormalFormGame, ::Type{<:Algorithm})
 ```
 
 As always, the shortcuts for easier indexing and uitilization of the `Player` abstraction.

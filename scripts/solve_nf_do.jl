@@ -24,8 +24,9 @@ end
 
 println(nfg)
 
-# solve normal form game by linear program
+# solve normal form game by Double Oracle algorithm
 println("Solving given normal form game by Double Oracle algorithm")
+println()
 solution = solve(nfg, DoubleOracleAlgorithm)
 
 println(solution)

@@ -23,7 +23,11 @@ There are few prepared scripts in the `scripts` directory to demonstrate functio
 
 - `solve_nf_do.jl [path_to_input_file]` solves a game using the Double Oracle algorithm. The output is printed to standard output. The game is either loaded from file given by optional `path_to_input_file` or a random one is generated.
 
-    - for example to solve **Matching pennies** use: `julia solve_nf_lp.jl ../data/nf_games/matching_pennies.nfg`
+    - for example to solve **Matching pennies** use: `julia solve_nf_do.jl ../data/nf_games/matching_pennies.nfg`
+
+- `solve_nf_both.jl [path_to_input_file]` solves a game using the Linear programming and Double Oracle algorithm. The outputs are printed to standard output. The game is either loaded from file given by optional `path_to_input_file` or a random one is generated.
+
+    - for example to solve **Matching pennies** use: `julia solve_nf_both.jl ../data/nf_games/matching_pennies.nfg`
 
     The parameters for random generation can be edited in the scripts.
 

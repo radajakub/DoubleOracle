@@ -6,17 +6,19 @@ In contrast to MatrixGame, this solution corresponds always to the whole NFG.
 
 # Fields
 - name: name of the NormalFormGame (for pretty output)
+- method: name of the method used to solve the problem
 - outcomes: 2-tuple of outcome for each player
 - strategies: 2-tuple of strategies for each player (strategy is a vector of tuples, where first part is name of action and second is a playing probability in equilibrium)
 """
 struct Solution
     name::String
+    method::Type{<:Algorithm}
     outcomes::NTuple{2,<:Real}
     strategies::NTuple{2,Vector{Tuple{String,Float64}}}
 end
 
 """
-    Solution(mg::MatrixGame, nfg::NormalFormGame)
+    Solution(mg::MatrixGame, nfg::NormalFormGame, method::Type{<:Algorithm})
 
 Construct Solution in a case where `mg` contains solution of the whole `nfg`, i.e. in exact solution by linear programming.
 Strategies in `mg` are assumed to be of same length as action sets in `nfg`.
@@ -27,25 +29,23 @@ julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
 
 julia> mg = MatrixGame(nfg.U);
 
-julia> Solution(mg, nfg)
-The two-player zero-sum Normal-Form game was solved
-
+julia> Solution(mg, nfg, LinearProgram)
+The two-player zero-sum Normal-Form game was solved by Linear program
 Player 1 gains outcome 0.0 by playing a strategy
  → [1 : 0.5, 2 : 0.5]
-
 Player 2 gains outcome -0.0 by playing a strategy
  → [A : 0.5, B : 0.5]
 
 ```
 """
-function Solution(mg::MatrixGame, nfg::NormalFormGame)
+function Solution(mg::MatrixGame, nfg::NormalFormGame, method::Type{<:Algorithm})
     P1, P2 = nfg.N
 
     # enforce that strategy has the same length as is the number of actions in the action set
     @assert length(mg.strategies[P1]) == nfg.A[P1].n
     @assert length(mg.strategies[P2]) == nfg.A[P2].n
 
-    return Solution(nfg.name, mg.outcomes, (pairstrategies(allnames(nfg.A[P1]), mg[P1]), pairstrategies(allnames(nfg.A[P2]), mg[P2])))
+    return Solution(nfg.name, method, mg.outcomes, (pairstrategies(allnames(nfg.A[P1]), mg[P1]), pairstrategies(allnames(nfg.A[P2]), mg[P2])))
 end
 
 """
@@ -74,33 +74,31 @@ MatrixGame results:
 → strategy of row player: [1.0]
 → strategy of column player: [1.0]
 
-julia> Solution(mg, O1, O2, nfg)
-The two-player zero-sum Normal-Form game was solved
-
+julia> Solution(mg, O1, O2, nfg, DoubleOracleAlgorithm)
+The two-player zero-sum Normal-Form game was solved by Double Oracle algorithm
 Player 1 gains outcome -1.0 by playing a strategy
  → [1 : 1.0, 2 : 0.0]
-
 Player 2 gains outcome 1.0 by playing a strategy
  → [A : 0.0, B : 1.0]
 
 ```
 """
-function Solution(mg::MatrixGame, O1::Oracle, O2::Oracle, nfg::NormalFormGame)
+function Solution(mg::MatrixGame, O1::Oracle, O2::Oracle, nfg::NormalFormGame, method::Type{<:Algorithm})
     P1, P2 = nfg.N
     A1, A2 = nfg.A
 
     pi1 = fullstrategy(O1, mg[P1], A1.n)
     pi2 = fullstrategy(O2, mg[P2], A2.n)
 
-    return Solution(nfg.name, mg.outcomes, (pairstrategies(allnames(A1), pi1), pairstrategies(allnames(A2), pi2)))
+    return Solution(nfg.name, method, mg.outcomes, (pairstrategies(allnames(A1), pi1), pairstrategies(allnames(A2), pi2)))
 end
 
 function Base.show(io::IO, solution::Solution)
-    println(io, "The two-player zero-sum Normal-Form game was solved")
+    print(io, "The two-player zero-sum Normal-Form game was solved by $(solution.method)")
     for P in createplayers(2)
         println(io)
         println(io, "$(P) gains outcome $(solution(P)) by playing a strategy")
-        println(io, " → [", join(map(pair -> "$(pair[1]) : $(pair[2])", solution[P]), ", "), "]")
+        print(io, " → [", join(map(pair -> "$(pair[1]) : $(pair[2])", solution[P]), ", "), "]")
     end
 end
 
@@ -111,7 +109,7 @@ Shortcut to obtain `outcome` of a `player` present in `solution`.
 
 # Examples
 ```jldoctest
-julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
+julia> solution = Solution("test", LinearProgram, (1.0, -1.0), ([("A", 1)], [("B", 1)]));
 
 julia> solution(Player(2))
 -1.0
@@ -127,7 +125,7 @@ Shortcut to obtain `strategy` of a `player` present in `solution`.
 
 # Examples
 ```jldoctest
-julia> solution = Solution("test", (1.0, -1.0), ([("A", 1)], [("B", 1)]));
+julia> solution = Solution("test", LinearProgram, (1.0, -1.0), ([("A", 1)], [("B", 1)]));
 
 julia> solution[Player(2)]
 1-element Vector{Tuple{String, Float64}}:

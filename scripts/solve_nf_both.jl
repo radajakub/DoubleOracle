@@ -24,9 +24,22 @@ end
 
 println(nfg)
 
-# solve normal form game by linear program
-println("Solving given normal form game by Linear programming")
-println()
-solution = solve(nfg, LinearProgram)
 
-println(solution)
+# solve normal form game by linear programming
+println("Solving given normal form game by Linear programming ")
+lpsolution = solve(nfg, LinearProgram)
+
+println()
+
+# solve normal form game by Double Oracle algorithm
+println("Solving given normal form game by Double Oracle algorithm")
+dosolution = solve(nfg, DoubleOracleAlgorithm)
+
+println()
+println(samesolutions(lpsolution, dosolution) ? "same" : "different", " solutions")
+
+println()
+println(lpsolution)
+
+println()
+println(dosolution)
