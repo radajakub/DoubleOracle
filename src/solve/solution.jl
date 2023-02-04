@@ -222,3 +222,79 @@ julia> pairstrategies(names, probs)
 ```
 """
 pairstrategies(names::Vector{String}, probs::Vector{Float64}) = collect(zip(names, probs))
+
+"""
+    support(strategy::Vector{Tuple{String,Float64}})
+
+Compute `support` of a `strategy`, i.e. set of actions played with non-zero probability in the `strategy`.
+Return the list of `names` of the actions.
+
+# Example
+```jldoctest
+julia> strategy = [("A", 0.1), ("B", 0.5), ("C", 0.0), ("D", 0.0), ("E", 0.4)];
+
+julia> support(strategy)
+3-element Vector{String}:
+ "A"
+ "B"
+ "E"
+
+```
+"""
+support(strategy::Vector{Tuple{String,Float64}}) = [p[1] for p in strategy if p[2] > 0]
+
+"""
+    support(s::Solution)
+
+Compute `support` of a all strategies in the Solution `s`.
+Returns an `NTuple{Vector{String}}` of action names based on the number of strategies `N` in `s`.
+
+# Example
+```jldoctest
+julia> nfg = load("../data/nf_games/test.nfg", NormalFormGame);
+
+julia> s = solve(nfg, LinearProgram);
+
+julia> support(s)
+(["1", "2"], ["B", "C"])
+
+```
+"""
+support(s::Solution) = support.(s.strategies)
+
+"""
+    supportratio(strategy::Vector{Tuple{String,Float64}}; digits=2)
+
+Compute ratio of actions in the `support` of a `strategy` to the total number of available actions.
+Return number from range ``[0, 1]``.
+The `digits` keywoard parameter specifies the rounding precision of the ratio.
+
+# Example
+```jldoctest
+julia> strategy = [("A", 0.1), ("B", 0.5), ("C", 0.0), ("D", 0.0), ("E", 0.4)];
+
+julia> supportratio(strategy)
+0.6
+
+```
+"""
+supportratio(strategy::Vector{Tuple{String,Float64}}; digits=2) = round(length(support(strategy)) / length(strategy); digits)
+
+"""
+    supportratio(s::Solution; digits=2)
+
+Compute the support ratio for all strategies in the Solution `s`.
+Returns an `NTuple{Float64}` based on the number of strategies `N` in `s`.
+The `digits` keywoard parameter specifies the rounding precision of the ratio.
+
+# Examples
+```jldoctest
+julia> nfg = load("../data/nf_games/test.nfg", NormalFormGame);
+
+julia> s = solve(nfg, LinearProgram);
+
+julia> supportratio(s)
+(1.0, 0.67)
+```
+"""
+supportratio(s::Solution; digits=2) = supportratio.(s.strategies; digits)

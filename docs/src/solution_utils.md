@@ -52,3 +52,12 @@ samepayoffs(::NTuple{2,Float64}, ::NTuple{2,Float64})
 samestrategies(::Vector{Tuple{String,Float64}}, ::Vector{Tuple{String,Float64}})
 samesolutions(::Solution, ::Solution)
 ```
+
+For further analysis of the solution, the functions related to strategy support can be used.
+
+```@docs
+support(::Vector{Tuple{String,Float64}})
+support(::Solution)
+supportratio(::Vector{Tuple{String,Float64}})
+supportratio(::Solution)
+```
