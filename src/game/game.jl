@@ -84,8 +84,8 @@ end
 """
     load(filepath::String, type::Type{NormalFormGame})
 
-Load and return a game of `type` (i.e. ``NormalFormGame``, ...) from file located in the filesystem at `filepath`.
-The extension of the `filepath` must correspond to the game `type` (e.g. ``NormalFormGame -> .nfg``).
+Load and return a game of `type` (i.e. `NormalFormGame`, ...) from file located in the filesystem at `filepath`.
+The extension of the `filepath` must correspond to the game `type` (e.g. `NormalFormGame` -> `.nfg`).
 
 # Example
 ```julia-repl
