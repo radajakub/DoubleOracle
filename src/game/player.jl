@@ -21,7 +21,7 @@ Base.show(io::IO, p::Player) = print(io, "Player $(p.id)")
 """
     createplayers(n::Integer)
 
-Create a vector of ``n`` Players with ids ``i ∈ \{1,…,n\}``
+Create a vector of ``n`` Players with ids ``i ∈ \\{1,…,n\\}``
 
 # Examples
 ```jldoctest
