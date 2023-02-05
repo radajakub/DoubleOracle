@@ -15,7 +15,7 @@ Time, memory, allocations were observed. Moreover, ratio of *support* actions to
 
 ## Analysis
 
-![Time plot](../pictures/timeplot.png)
+![Time plot](./pictures/timeplot.png)
 
 As can be seen on this plot, the Linear programming method greatly outperforms the Double Oracle algorithm.
 
@@ -23,9 +23,9 @@ Moreover, the time plots are very similar to the graphs showing number of alloca
 This is caused mainly by repeatedly constructing the restricted matrices and the smaller linear programs.
 This could be improved by using views into the original matrix instead of creating smaller copies.
 
-![Memory plot](../pictures/memplot.png)
+![Memory plot](./pictures/memplot.png)
 
-![Allocations plot](../pictures/allocplot.png)
+![Allocations plot](./pictures/allocplot.png)
 
 However, it is quite likely, that for even larger games, the linear program itself would be so large, it would not fit into the memory.
 In this situation, the Double Oracle algorithm could start to perform better as it almost never constructs the whole LP formulation.
@@ -35,7 +35,7 @@ The points oscilate around the value 0.5 meaning that an equilibrium strategy co
 This is quite a large portion of actions and can be behind the poor performance of DO algorithm.
 To solve the game, the algorithm has to perform at least N/2 oracle updates for each player and thus solve a large number of linear programs.
 
-![Support plot](../pictures/supportplot.png)
+![Support plot](./pictures/supportplot.png)
 
 This could be partially amended by starting from a larger subset of actions and not from a single action.
 This being said, the DO algorithm is meant for games where a large portion of actions is not in the support of an equilibrial strategy.
