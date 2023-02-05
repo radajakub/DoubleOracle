@@ -166,7 +166,7 @@ version = "0.9.3"
 deps = ["Clp", "JuMP", "LinearAlgebra", "StatsBase"]
 path = ".."
 uuid = "2153004a-5f51-4728-838f-65cb51c6b0d2"
-version = "0.0.0"
+version = "1.0.0"
 
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
