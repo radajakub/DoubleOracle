@@ -31,6 +31,8 @@ There are few prepared scripts in the `scripts` directory to demonstrate functio
 
     The parameters for random generation can be edited in the scripts.
 
+- `benchmark.jl` was used to generate plots visible in the documentation. It's execution takes some long time, it does not showcase any functionality, it only measures performance.
+
 ## Tests
 
 Test can be run by executing `test` in package manager mode in `julia REPL`.

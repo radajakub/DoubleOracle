@@ -1,2 +1,4 @@
 [deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 DoubleOracle = "2153004a-5f51-4728-838f-65cb51c6b0d2"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
