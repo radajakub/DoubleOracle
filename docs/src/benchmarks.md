@@ -5,10 +5,10 @@ This page shows and compares performance of both algorithms.
 ## Experiments
 
 Performance of both algorithms was measured by the `@benchmark` macro and from that, the median trial was taken.
-Larger games were created subsequently and solved by both algorithms.
+Increasingly large games were created subsequently and solved by both algorithms.
 The resulting statistics are shown in the graphs below.
 
-Size of each game depends on a parameter ``c = {2, 4, 6, 8, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}``.
+Size of each game depends on a parameter ``c = \{2, 4, 6, 8, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100\}``.
 The number of rows and columns is then randomly drawn from an uniform interval of integers ``[c, 2c]``.
 
 Time, memory, allocations were observed. Moreover, ratio of *support* actions to the total number of actions was tracked for each solution.

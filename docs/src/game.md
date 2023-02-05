@@ -7,7 +7,7 @@ This parts documents loading and generating a new game and auxiliary functions f
 Structure and functions representing Players in the game.
 `Player` is used mainly for printing and for indexing in more complicated structures.
 
-One or more `Players` can be created at once.
+One or more `Player`s can be created at once.
 ```@docs
 Player
 createplayers(::Integer)
