@@ -7,7 +7,7 @@ makedocs(;
     modules=[DoubleOracle],
     authors="Jakub Rada <dev.jakubrada@icloud.com>",
     repo="https://github.com/radajakub/DoubleOracle/blob/{commit}{path}#{line}",
-    sitename="DoubleOracle",
+    sitename="DoubleOracle Documentation",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="master",
