@@ -75,4 +75,5 @@ generate(::Type{NormalFormGame};)
 To avoid always writing `nfg.U[a1, a2]` a shortcut is provided.
 ```@docs
 Base.getindex(::NormalFormGame, ::Integer, ::Integer)
+Base.getindex(::NormalFormGame, ::String, ::String)
 ```

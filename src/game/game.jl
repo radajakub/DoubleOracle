@@ -69,13 +69,23 @@ julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
 
 julia> nfg[1, 1]
 1.0
+```
+"""
+Base.getindex(nfg::NormalFormGame, a1::Integer, a2::Integer) = nfg.U[a1, a2]
+
+"""
+    getindex(nfg::NormalFormGame, a1::String, a2::String)
+
+Obtain `nfg` payoff by playing joing action profile `(a1, a2)`
+# Examples
+```jldoctest
+julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);
 
 julia> nfg["1", "B"]
 -1.0
 
 ```
 """
-Base.getindex(nfg::NormalFormGame, a1::Integer, a2::Integer) = nfg.U[a1, a2]
 function Base.getindex(nfg::NormalFormGame, a1::String, a2::String)
     A1, A2 = nfg.A
     return nfg.U[A1[a1], A2[a2]]
