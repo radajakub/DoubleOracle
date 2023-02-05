@@ -10,7 +10,7 @@ Base.show(io::IO, ::Type{LinearProgram}) = print(io, "Linear program")
 """
     solve(nfg::NormalFormGame, ::Type{LinearProgram})
 
-Solve the `NormalFormGame` by linear programming and return the outcome and equilibrium strategies.
+Solve the `NormalFormGame` by linear programming and return the payoff and equilibrium strategies.
 """
 function solve(nfg::NormalFormGame, ::Type{LinearProgram})
     # solve nfg as a full Matrix game

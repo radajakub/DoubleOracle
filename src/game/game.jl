@@ -9,13 +9,13 @@ abstract type Game end
     NormalFormGame{T}
 
 Model for a two-player zero-sum game in Normal Form.
-Here, player 1 tries to maximise the outcome of type `T`, player 2 minimises it.
+Here, player 1 tries to maximise the payoff of type `T`, player 2 minimises it.
 
 # Fields
 - `name`: Name of the NF game
 - `N`: Players of the game
 - `A`: Available actions of each player
-- `U`: Game matrix containing the outcomes for each joint action profile
+- `U`: Game matrix containing the payoffs for each joint action profile
 """
 struct NormalFormGame{T} <: Game where {T<:Real}
     name::String
@@ -62,7 +62,7 @@ end
 """
     getindex(nfg::NormalFormGame, a1::Integer, a2::Integer)
 
-Obtain `nfg` outcome by playing joing action profile `(a1, a2)`
+Obtain `nfg` payoff by playing joing action profile `(a1, a2)`
 # Examples
 ```jldoctest
 julia> nfg = load("../data/nf_games/matching_pennies.nfg", NormalFormGame);

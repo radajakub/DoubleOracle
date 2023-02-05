@@ -10,11 +10,11 @@ abstract type Algorithm end
 
 Solve and represent solution of a Matrix game with matrix `u`.
 Solution is made by a standard linear program for two-player zero-sum Normal-form games.
-Both outcome and an equilibrium strategy is saved for both players.
+Both payoff and an equilibrium strategy is saved for both players.
 Note that this can be only a solution of a subgame, not necessarily the whole NFG.
 
 # Fields
-- `outcomes`: 2-tuple with game outcomes for each respective player
+- `payoffs`: 2-tuple with game payoffs for each respective player
 - `strategies`: 2-tuple with en equilibrium strategies (probability distribution over rows/columns Δ(A)) for each respective player
 
 # Examples
@@ -23,14 +23,14 @@ julia> u = [1 -1; -1 1];
 
 julia> MatrixGame(u)
 MatrixGame results:
-→ outcome of the Nash Equilibrium: (0.0, -0.0)
+→ payoff of the Nash Equilibrium: (0.0, -0.0)
 → strategy of row player: [0.5, 0.5]
 → strategy of column player: [0.5, 0.5]
 
 ```
 """
 struct MatrixGame
-    outcomes::NTuple{2,<:Real}
+    payoffs::NTuple{2,<:Real}
     strategies::NTuple{2,Vector{Float64}}
 
     function MatrixGame(u::AbstractMatrix{T}) where {T<:Real}
@@ -70,7 +70,7 @@ end
 function Base.show(io::IO, mg::MatrixGame)
     P1, P2 = createplayers(2)
     println(io, "MatrixGame results:")
-    println(io, "→ outcome of the Nash Equilibrium: $((mg(P1), mg(P2)))")
+    println(io, "→ payoff of the Nash Equilibrium: $((mg(P1), mg(P2)))")
     println(io, "→ strategy of row player: $(mg[P1])")
     print(io, "→ strategy of column player: $(mg[P2])")
 end
@@ -78,7 +78,7 @@ end
 """
     (mg::MatrixGame)(p::Player)
 
-Obtain the `outcome` value of a `player` from the `MatrixGame` structure.
+Obtain the `payoff` value of a `player` from the `MatrixGame` structure.
 
 # Examples
 ```jldoctest
@@ -89,7 +89,7 @@ julia> mg(Player(1))
 
 ```
 """
-(mg::MatrixGame)(p::Player) = mg.outcomes[p]
+(mg::MatrixGame)(p::Player) = mg.payoffs[p]
 
 
 """

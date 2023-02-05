@@ -157,7 +157,7 @@ end
 """
     solve(nfg::NormalFormGame, ::Type{DoubleOracleAlgorithm})
 
-Solve the `NormalFormGame` by Oracle algorithm and return the outcome and equilibrium strategies.
+Solve the `NormalFormGame` by Oracle algorithm and return the payoff and equilibrium strategies.
 
 # Algorithm
 1. Start from random actions in the Oracles for both players

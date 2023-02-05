@@ -86,7 +86,7 @@
         solution = solve(nfg, DoubleOracleAlgorithm)
         P1, P2 = createplayers(2)
 
-        @testset verbose = true "Outcome value" begin
+        @testset verbose = true "Payoff value" begin
             @test solution(P1) == 0.0
             @test solution(P2) == -0.0
         end

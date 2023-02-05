@@ -7,13 +7,13 @@ In contrast to MatrixGame, this solution corresponds always to the whole NFG.
 # Fields
 - name: name of the NormalFormGame (for pretty output)
 - method: name of the method used to solve the problem
-- outcomes: 2-tuple of outcome for each player
+- payoffs: 2-tuple of payoff for each player
 - strategies: 2-tuple of strategies for each player (strategy is a vector of tuples, where first part is name of action and second is a playing probability in equilibrium)
 """
 struct Solution
     name::String
     method::Type{<:Algorithm}
-    outcomes::NTuple{2,<:Real}
+    payoffs::NTuple{2,<:Real}
     strategies::NTuple{2,Vector{Tuple{String,Float64}}}
 end
 
@@ -31,9 +31,9 @@ julia> mg = MatrixGame(nfg.U);
 
 julia> Solution(mg, nfg, LinearProgram)
 The two-player zero-sum Normal-Form game was solved by Linear program
-Player 1 gains outcome 0.0 by playing a strategy
+Player 1 gains payoff 0.0 by playing a strategy
  → [1 : 0.5, 2 : 0.5]
-Player 2 gains outcome -0.0 by playing a strategy
+Player 2 gains payoff -0.0 by playing a strategy
  → [A : 0.5, B : 0.5]
 
 ```
@@ -45,7 +45,7 @@ function Solution(mg::MatrixGame, nfg::NormalFormGame, method::Type{<:Algorithm}
     @assert length(mg.strategies[P1]) == nfg.A[P1].n
     @assert length(mg.strategies[P2]) == nfg.A[P2].n
 
-    return Solution(nfg.name, method, mg.outcomes, (pairstrategies(allnames(nfg.A[P1]), mg[P1]), pairstrategies(allnames(nfg.A[P2]), mg[P2])))
+    return Solution(nfg.name, method, mg.payoffs, (pairstrategies(allnames(nfg.A[P1]), mg[P1]), pairstrategies(allnames(nfg.A[P2]), mg[P2])))
 end
 
 """
@@ -70,15 +70,15 @@ julia> subgame = restrict(nfg, O1, O2)
 
 julia> mg = MatrixGame(subgame)
 MatrixGame results:
-→ outcome of the Nash Equilibrium: (-1.0, 1.0)
+→ payoff of the Nash Equilibrium: (-1.0, 1.0)
 → strategy of row player: [1.0]
 → strategy of column player: [1.0]
 
 julia> Solution(mg, O1, O2, nfg, DoubleOracleAlgorithm)
 The two-player zero-sum Normal-Form game was solved by Double Oracle algorithm
-Player 1 gains outcome -1.0 by playing a strategy
+Player 1 gains payoff -1.0 by playing a strategy
  → [1 : 1.0, 2 : 0.0]
-Player 2 gains outcome 1.0 by playing a strategy
+Player 2 gains payoff 1.0 by playing a strategy
  → [A : 0.0, B : 1.0]
 
 ```
@@ -90,14 +90,14 @@ function Solution(mg::MatrixGame, O1::Oracle, O2::Oracle, nfg::NormalFormGame, m
     pi1 = fullstrategy(O1, mg[P1], A1.n)
     pi2 = fullstrategy(O2, mg[P2], A2.n)
 
-    return Solution(nfg.name, method, mg.outcomes, (pairstrategies(allnames(A1), pi1), pairstrategies(allnames(A2), pi2)))
+    return Solution(nfg.name, method, mg.payoffs, (pairstrategies(allnames(A1), pi1), pairstrategies(allnames(A2), pi2)))
 end
 
 function Base.show(io::IO, solution::Solution)
     print(io, "The two-player zero-sum Normal-Form game was solved by $(solution.method)")
     for P in createplayers(2)
         println(io)
-        println(io, "$(P) gains outcome $(solution(P)) by playing a strategy")
+        println(io, "$(P) gains payoff $(solution(P)) by playing a strategy")
         print(io, " → [", join(map(pair -> "$(pair[1]) : $(pair[2])", solution[P]), ", "), "]")
     end
 end
@@ -105,7 +105,7 @@ end
 """
     (solution::Solution)(p::Player)
 
-Shortcut to obtain `outcome` of a `player` present in `solution`.
+Shortcut to obtain `payoff` of a `player` present in `solution`.
 
 # Examples
 ```jldoctest
@@ -116,7 +116,7 @@ julia> solution(Player(2))
 
 ```
 """
-(solution::Solution)(p::Player) = solution.outcomes[p]
+(solution::Solution)(p::Player) = solution.payoffs[p]
 
 """
     getindex(solution::Solution, p::Player)
@@ -139,7 +139,7 @@ Base.getindex(solution::Solution, p::Player) = solution.strategies[p]
     samesolutions(s1::Solution, s2::Solution; atol=1e-4)
 
 Compare two solutions `s1`, `s2` whether they are the same (or similar).
-Outcomes, names of actions and probabilities are compared with tolerance `atol`.
+Payoffs, names of actions and probabilities are compared with tolerance `atol`.
 
 # Examples
 ```jldoctest
@@ -155,7 +155,7 @@ true
 """
 function samesolutions(s1::Solution, s2::Solution; atol=1e-4)
     P1, P2 = createplayers(2)
-    return samepayoffs(s1.outcomes, s2.outcomes; atol) &&
+    return samepayoffs(s1.payoffs, s2.payoffs; atol) &&
            samestrategies(s1.strategies[P1], s2.strategies[P1]; atol) &&
            samestrategies(s1.strategies[P2], s2.strategies[P2]; atol)
 end
@@ -164,7 +164,7 @@ end
     samepayoffs(s1::NTuple{2, Float64}, s2::NTuple{2, Float64}; atol=1e-4)
 
 Compare two solutions `s1`, `s2` whether they have the same (or similar) payoffs.
-Outcomes are compared with tolerance `atol`.
+Payoffs are compared with tolerance `atol`.
 
 # Examples
 ```jldoctest
@@ -174,7 +174,7 @@ julia> s1 = solve(nfg, LinearProgram);
 
 julia> s2 = solve(nfg, DoubleOracleAlgorithm);
 
-julia> samepayoffs(s1.outcomes, s2.outcomes)
+julia> samepayoffs(s1.payoffs, s2.payoffs)
 true
 ```
 """
