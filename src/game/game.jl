@@ -134,14 +134,14 @@ end
 Generate random Normal-Form game with given parameters.
 
 # Fields
-- A1min::Integer: minimum number of actions of player 1 (default 2)
-- A1max::Integer: maximum number of actions of player 1 (default 5)
-- A2min::Integer: minimum number of actions of player 2 (default 2)
-- A2max::Integer: maximum number of actions of player 2 (default 5)
-- minutil<:Real: minimum utility possible for player 1
-- maxutil<:Real: maxium utility possible for player 1
-- utilstep<:Real: minimum difference between two different utility values for player 1
-- unique: option to enforce unique payoffs from the interval `minutil:maxutil` (ignores step to produce sufficient range)
+- `A1min::Integer`: minimum number of actions of player 1 (default 2)
+- `A1max::Integer`: maximum number of actions of player 1 (default 5)
+- `A2min::Integer`: minimum number of actions of player 2 (default 2)
+- `A2max::Integer`: maximum number of actions of player 2 (default 5)
+- `minutil<:Real`: minimum utility possible for player 1
+- `maxutil<:Real`: maxium utility possible for player 1
+- `utilstep<:Real`: minimum difference between two different utility values for player 1
+- `unique::Bool`: option to enforce unique payoffs from the interval `minutil:maxutil` (ignores step to produce sufficient range)
 
 # Examples
 ```jldoctest

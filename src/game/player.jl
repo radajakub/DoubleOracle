@@ -3,6 +3,9 @@
 
 Represent a Player with an integer `id` in a Game
 
+# Fields
+- `id::Integer`: id of the player
+
 # Examples
 ```jldoctest
 julia> Player(1)
