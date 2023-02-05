@@ -48,7 +48,7 @@ restrict(::NormalFormGame, ::Oracle, ::Type{RowRestriction})
 ## Best response
 
 Last necessary component of the Double Oracle algorithm is a concept of a best response.
-Here, the players search for an optimal pure strategy (i.e. single action), which would result in the best outcome (from their perspective) while keeping the Oracle and strategy of the opponent fixed.
+Here, the players search for an optimal pure strategy (i.e. single action), which would result in the best payoff (from their perspective) while keeping the Oracle and strategy of the opponent fixed.
 
 ```@docs
 bestresponse(::NormalFormGame, ::Oracle, ::Vector{Float64}, ::Type{ColumnRestriction})

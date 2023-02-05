@@ -9,7 +9,7 @@ Algorithm
 ## Matrix Game
 
 This serves as a general solver for matrix game with arbitrary size, not necessarily corresponding to size of the actual Normal-Form game.
-It solves a linear program for the passed matrix `u` (game or subgame) and saves the outcomes and equilibrium strategies of both players.
+It solves a linear program for the passed matrix `u` (game or subgame) and saves the payoffs and equilibrium strategies of both players.
 
 ```@docs
 MatrixGame
@@ -25,7 +25,7 @@ Base.getindex(::MatrixGame, ::Player)
 ## Solution
 
 Solution represents the final solution of the whole Normal-Form game.
-It holds final equilibria strategies and outcomes.
+It holds final equilibria strategies and payoffs.
 
 ```@docs
 Solution
